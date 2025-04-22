@@ -4,22 +4,23 @@ javascript:(function(){
     alert('This only works on YouTube video pages!');
     return;
   }
+
   var iframe = document.createElement('iframe');
   iframe.src = 'https://p.oceansaver.in/api/button2/?url=' + encodeURIComponent(ytUrl) + '&f=wav';
   iframe.style.width = '100%';
   iframe.style.height = '80px';
   iframe.style.border = 'none';
-  iframe.style.marginTop = '10px';
+  iframe.style.margin = '10px 0';
 
-  var target = document.querySelector('#below');
-  if (!target) {
+  var desc = document.getElementById('description');
+  if (desc && desc.parentNode) {
+    desc.parentNode.insertBefore(iframe, desc);
+  } else {
     var player = document.querySelector('#player') || document.querySelector('ytd-watch-flexy');
     if (player) {
       player.appendChild(iframe);
     } else {
       document.body.appendChild(iframe);
     }
-  } else {
-    target.appendChild(iframe);
   }
 })();
